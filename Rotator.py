@@ -1,3 +1,4 @@
+from datetime import datetime
 import Proxy_Finder
 import random
 
@@ -22,7 +23,7 @@ def get_proxy():
         proxy_id = 0
         create_new(rotator_size, rotator_iteration)
 
-    if proxy_id > len(proxies)-1:
+    if proxy_id > len(proxies) - 1:
         proxy_id = 0
 
     proxy = proxies[proxy_id]
@@ -42,5 +43,9 @@ def create_new(size=10, iterations=100):
     proxies = Proxy_Finder.start_checking(size)
 
 
+i = datetime.now()
 for x in range(0, 30):
     print(get_proxy())
+print(f'Затраченое время: {datetime.now() - i}')
+
+

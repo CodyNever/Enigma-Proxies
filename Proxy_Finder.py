@@ -11,22 +11,6 @@ working_proxy = []
 
 def start_checking(count):
     proxies = grab_proxy()
-    total_proxies_checked = 0
-
-    # for proxy in proxies:
-    #     total_proxies_checked += 1
-    #     print(f'Проверка прокси {total_proxies_checked} из {len(proxies)}')
-    #
-    #     if check_proxy(proxy):
-    #         working_proxy.append(proxy)
-    #
-    #     if len(working_proxy) >= count:
-    #         return working_proxy
-    #
-    # if len(working_proxy) != 0:
-    #     return working_proxy
-    # else:
-    #     print('ERROR: Не найдено прокси')
 
     global working_proxy
     working_proxy = []
@@ -43,7 +27,7 @@ def start_checking(count):
             print('ERROR: Не найдено прокси')
             return
 
-        print(f'Проверка прокси {x} из {len(proxies)}')
+        print(f'{x} / {len(proxies)}')
 
         if check_proxy(proxies[x]):
             working_proxy.append(proxies[x])
