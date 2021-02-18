@@ -1,8 +1,8 @@
 import Proxy_Finder
 import random
 
-rotator_iteration = 100
-rotator_size = 10
+rotator_iteration = 10
+rotator_size = 3
 
 proxy_id = 0
 total_iterations = 0
@@ -39,8 +39,8 @@ def create_new(size=10, iterations=100):
     rotator_size = size
     rotator_iteration = iterations
 
-    for index in range(size):
-        proxies.append(random.randint(0, 5))
-    pass
-# for x in range(0, 500):
-#     print(get_proxy())
+    proxies = Proxy_Finder.start_checking(size)
+
+
+for x in range(0, 30):
+    print(get_proxy())
