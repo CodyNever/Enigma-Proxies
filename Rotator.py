@@ -1,9 +1,8 @@
 from datetime import datetime
 import Proxy_Finder
-import random
 
 rotator_iteration = 10
-rotator_size = 3
+rotator_size = 5
 
 proxy_id = 0
 total_iterations = 0
@@ -23,8 +22,12 @@ def get_proxy():
         proxy_id = 0
         create_new(rotator_size, rotator_iteration)
 
-    if proxy_id > len(proxies) - 1:
+    if proxy_id >= len(proxies):
         proxy_id = 0
+
+    if len(proxies) == 0:
+        print('Error: not proxies found')
+        return ''
 
     proxy = proxies[proxy_id]
     proxy_id += 1
@@ -42,10 +45,11 @@ def create_new(size=10, iterations=100):
 
     proxies = Proxy_Finder.start_checking(size)
 
+    if proxies is None:
+        proxies = []
+
 
 i = datetime.now()
 for x in range(0, 30):
     print(get_proxy())
 print(f'Затраченое время: {datetime.now() - i}')
-
-

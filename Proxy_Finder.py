@@ -1,11 +1,15 @@
-import random
-
-import requests
-import re
 from bs4 import BeautifulSoup
+from enum import Enum
+import requests
+import random
+import re
 
-TIMEOUT = 0.25
+TIMEOUT = 0.1
 MAX_PROXIES = 1000
+
+FINDER_TYPE = Enum('FinderType', 'site file')
+MY_TYPE = FINDER_TYPE.file
+
 working_proxy = []
 
 
@@ -24,7 +28,6 @@ def start_checking(count):
         x += 1
 
         if x == start_pos:
-            print('ERROR: Не найдено прокси')
             return
 
         print(f'{x} / {len(proxies)}')
@@ -38,17 +41,22 @@ def start_checking(count):
 
 def grab_proxy():
     proxies = []
-    html = requests.get('https://free-proxy-list.net')
-    soup = str(BeautifulSoup(html.text, 'html.parser')).split()
-
     ip_like_pattern = re.compile(r'([0-9]{1,3}\.){3}([0-9]{1,3})')
+
+    soup = open('proxies.txt').read().split('\n')
+
+    if soup is None:
+        MY_TYPE == FINDER_TYPE.site
+
+    if MY_TYPE == FINDER_TYPE.site:
+        html = requests.get('https://free-proxy-list.net')
+        soup = str(BeautifulSoup(html.text, 'html.parser')).split()
 
     for entry in soup:
         if re.match(ip_like_pattern, entry):
             if len(entry.split('.')) == 4:
                 proxies.append(entry)
     return proxies
-    # return proxies[MAX_PROXIES]
 
 
 def check_proxy(proxy):
