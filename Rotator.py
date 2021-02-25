@@ -50,6 +50,6 @@ def create_new(size=10, iterations=100):
 
 
 i = datetime.now()
-for x in range(0, 30):
+for x in range(0, 5):
     print(get_proxy())
-print(f'Затраченое время: {datetime.now() - i}')
+print(f'Time spent: {datetime.now() - i}')

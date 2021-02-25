@@ -1,10 +1,11 @@
+from datetime import datetime
 from bs4 import BeautifulSoup
 from enum import Enum
 import requests
 import random
 import re
 
-TIMEOUT = 0.1
+TIMEOUT = 0.6
 MAX_PROXIES = 1000
 
 FINDER_TYPE = Enum('FinderType', 'site file')
@@ -22,6 +23,7 @@ def start_checking(count):
     x = random.randint(0, len(proxies))
     start_pos = x
 
+    print(f'[ Start finding proxies {datetime.now()} ]')
     while True:
         if x > len(proxies) - 2:
             x = 0
@@ -30,7 +32,7 @@ def start_checking(count):
         if x == start_pos:
             return
 
-        print(f'{x} / {len(proxies)}')
+        # print(f'{x} / {len(proxies)}')
 
         if check_proxy(proxies[x]):
             working_proxy.append(proxies[x])
