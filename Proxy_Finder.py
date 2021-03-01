@@ -1,11 +1,11 @@
-from datetime import datetime
 from bs4 import BeautifulSoup
 from enum import Enum
+import file_logger
 import requests
 import random
 import re
 
-TIMEOUT = 0.6
+TIMEOUT = 0.25
 MAX_PROXIES = 1000
 
 FINDER_TYPE = Enum('FinderType', 'site file')
@@ -23,7 +23,8 @@ def start_checking(count):
     x = random.randint(0, len(proxies))
     start_pos = x
 
-    print(f'[ Start finding proxies {datetime.now()} ]')
+    file_logger.log('Start finding proxies')
+
     while True:
         if x > len(proxies) - 2:
             x = 0
@@ -32,7 +33,7 @@ def start_checking(count):
         if x == start_pos:
             return
 
-        # print(f'{x} / {len(proxies)}')
+        #print(f'{x} / {len(proxies)}')
 
         if check_proxy(proxies[x]):
             working_proxy.append(proxies[x])
@@ -42,6 +43,7 @@ def start_checking(count):
 
 
 def grab_proxy():
+    file_logger.log('Grab proxies')
     proxies = []
     ip_like_pattern = re.compile(r'([0-9]{1,3}\.){3}([0-9]{1,3})')
 
@@ -65,6 +67,7 @@ def check_proxy(proxy):
     url = 'http://' + proxy
     try:
         if requests.get('http://ya.ru', proxies={'http': url}, timeout=TIMEOUT).status_code == 200:
+            file_logger.log(f'Proxy find {proxy}')
             return True
     except Exception:
         return False

@@ -1,5 +1,5 @@
-from datetime import datetime
 import Proxy_Finder
+import file_logger
 
 rotator_iteration = 10
 rotator_size = 5
@@ -26,7 +26,7 @@ def get_proxy():
         proxy_id = 0
 
     if len(proxies) == 0:
-        print('Error: not proxies found')
+        file_logger.log('Error: not proxies found')
         return ''
 
     proxy = proxies[proxy_id]
@@ -36,6 +36,7 @@ def get_proxy():
 
 
 def create_new(size=10, iterations=100):
+    file_logger.log('Create new rotator')
     global rotator_iteration
     global rotator_size
     global proxies
@@ -49,7 +50,6 @@ def create_new(size=10, iterations=100):
         proxies = []
 
 
-i = datetime.now()
 for x in range(0, 5):
     print(get_proxy())
-print(f'Time spent: {datetime.now() - i}')
+print('Done')
