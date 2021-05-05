@@ -38,11 +38,12 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="EnigmaProxies.cs" />
         <Compile Include="Main.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="ProxyAnonymity.cs" />
-        <Compile Include="ProxyRoot\ProxyBase.cs" />
-        <Compile Include="ProxyRoot\ProxyType.cs" />
+        <Compile Include="ProxyBase.cs" />
+        <Compile Include="ProxyType.cs" />
         <Compile Include="Rotator.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

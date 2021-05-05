@@ -1,4 +1,4 @@
-﻿namespace Enigma_Proxies.ProxyRoot
+﻿namespace Enigma_Proxies
 {
     public class ProxyBase
     {

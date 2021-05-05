@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enigma_Proxies.ProxyRoot;
 
 namespace Enigma_Proxies
 {
@@ -48,6 +47,7 @@ namespace Enigma_Proxies
 
         public void UpdateRotator()
         {
+            // TODO Create rotator proxies updating
             Console.WriteLine("Update rotator!");
         }
     }
