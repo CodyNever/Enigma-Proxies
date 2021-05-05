@@ -1,0 +1,6 @@
+C:\Users\PC\Documents\GitHub\Enigma-Proxies\Enigma Proxies\Enigma Proxies\bin\Debug\Enigma_Proxies.exe
+C:\Users\PC\Documents\GitHub\Enigma-Proxies\Enigma Proxies\Enigma Proxies\bin\Debug\Enigma_Proxies.pdb
+C:\Users\PC\Documents\GitHub\Enigma-Proxies\Enigma Proxies\Enigma Proxies\obj\Debug\Enigma Proxies.csprojAssemblyReference.cache
+C:\Users\PC\Documents\GitHub\Enigma-Proxies\Enigma Proxies\Enigma Proxies\obj\Debug\Enigma Proxies.csproj.CoreCompileInputs.cache
+C:\Users\PC\Documents\GitHub\Enigma-Proxies\Enigma Proxies\Enigma Proxies\obj\Debug\Enigma_Proxies.exe
+C:\Users\PC\Documents\GitHub\Enigma-Proxies\Enigma Proxies\Enigma Proxies\obj\Debug\Enigma_Proxies.pdb
