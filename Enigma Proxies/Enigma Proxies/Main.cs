@@ -15,13 +15,14 @@ namespace Enigma_Proxies
                 new ProxyBase("0.001.004")
             };
 
-            var rotator = EnigmaProxies.CreateRotator(proxies);
+            EnigmaProxies.CreateRotator(proxies, 5);
+            EnigmaProxies.CreateRotator(proxies, 4);
 
-            for (var i = 0; i < 15; i++)
-            {
-                Console.WriteLine(rotator.GetProxy().Proxy);
-            }
-            
+            Console.WriteLine(EnigmaProxies.GetRotator(-1).RotatorMaxUsages);
+            Console.WriteLine(EnigmaProxies.GetRotator(0).RotatorMaxUsages);
+            Console.WriteLine(EnigmaProxies.GetRotator(1).RotatorMaxUsages);
+            Console.WriteLine(EnigmaProxies.GetRotator(2).RotatorMaxUsages);
+
             Console.ReadKey();
         }
     }

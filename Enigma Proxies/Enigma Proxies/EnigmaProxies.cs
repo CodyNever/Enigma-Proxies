@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Enigma_Proxies.Utilities;
 
 namespace Enigma_Proxies
 {
     public static class EnigmaProxies
-    {
+    { 
         private static List<Rotator> _rotators = new List<Rotator>();
 
 
@@ -11,36 +13,19 @@ namespace Enigma_Proxies
         {
             return _rotators.Count == 0 ? new ProxyBase("") : _rotators[0].GetProxy();
         }
-        
-        public static Rotator GetRotator(int id)
-        {
-            return _rotators[id];
-        }
-        
-        public static Rotator CreateRotator(List<ProxyBase> proxies)
-        {
-            if (_rotators.Count == 0) return CreateRotator(0, proxies);
-            return CreateRotator(_rotators.Count+1, proxies);
-        }
 
-        public static Rotator CreateRotator(List<ProxyBase> proxies, int maxProxies)
+        public static Rotator GetRotator(int id = 0)
         {
-            if (_rotators.Count == 0) return CreateRotator(0, proxies, maxProxies);
-            return CreateRotator(_rotators.Count+1, proxies, maxProxies);
-        }
-
-        public static Rotator CreateRotator(int id, List<ProxyBase> proxies)
-        {
-            var rotator = new Rotator(id, proxies);
-            _rotators[id] = rotator;
-            return rotator;
+            if (_rotators.Count == 0) return null;
+            return _rotators[EMath.Clamp(id, 0, _rotators.Count-1)];
         }
         
-        public static Rotator CreateRotator(int id, List<ProxyBase> proxies, int maxProxies)
+        public static Rotator CreateRotator(List<ProxyBase> proxies, int maxProxies = 10)
         {
-            var rotator = new Rotator(id, proxies, maxProxies);
-            _rotators[id] = rotator;
-            return rotator;
+            var id = _rotators.Count == 0 ? 0 : _rotators.Count - 1;
+            var r = new Rotator(id, proxies, maxProxies);
+            _rotators.Add(r);
+            return r;
         }
     }
 }
