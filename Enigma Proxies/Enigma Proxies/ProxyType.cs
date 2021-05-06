@@ -4,8 +4,8 @@
     {
         Unknown,
         HTTP,
-        FTP,
-        Socks,
-        SSL,
+        HTTPS,
+        Socks4,
+        Socks5,
     }
 }

@@ -21,5 +21,6 @@
         public ProxyType Type;
         public ProxyAnonymity Anonymity;
         public string Proxy;
+        public string Country;
     }
 }
