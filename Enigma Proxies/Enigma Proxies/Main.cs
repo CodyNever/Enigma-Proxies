@@ -18,8 +18,9 @@ namespace Enigma_Proxies
             EnigmaProxies.CreateRotator(proxies);
             
             var p = EnigmaProxies.GetProxy();
-            Console.WriteLine(ProxyChecker.CheckProxy(p));
             
+            //Console.WriteLine(ProxyChecker.CheckProxy(new ProxyBase("132.248.196.2:8080")));
+            Console.WriteLine(ProxyChecker.CheckProxy(new ProxyBase("6.2:8080")));
             Console.ReadKey();
         }
     }

@@ -1,4 +1,6 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.IO;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Enigma_Proxies
 {
@@ -6,11 +8,39 @@ namespace Enigma_Proxies
     {
         public static bool CheckProxy(ProxyBase proxy)
         {
-            var ip = proxy.Proxy.Split(':')[0];
-            var ping = new Ping();
-            var reply = ping.Send(ip);
+            try
+            {
+                var myIp = GetIp();
+                var receivedIp = GetIp(proxy.Proxy);
+                //Console.WriteLine($"my {myIp} : received {receivedIp}");
+                if (receivedIp == "") return false;
+                return receivedIp != myIp;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-            return reply != null && reply.Status == IPStatus.Success;
+        public static string GetIp(string proxy = null, int timeOut = 5000)
+        {
+            try
+            {
+                var webRequest = (HttpWebRequest) WebRequest.Create("http://ip-api.com/json/");
+            
+                if(proxy != null) webRequest.Proxy = new WebProxy(proxy, true);
+                webRequest.Timeout = timeOut;
+                webRequest.ReadWriteTimeout = timeOut;
+
+                var response = (HttpWebResponse) webRequest.GetResponse();
+                var streamReader = new StreamReader(response.GetResponseStream());
+
+                return Regex.Match(streamReader.ReadToEnd(), @"query"":""(.*?)""}").Groups[1].Value;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }
