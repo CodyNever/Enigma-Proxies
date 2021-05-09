@@ -11,7 +11,7 @@ namespace Enigma_Proxies
             try
             {
                 var myIp = GetIp();
-                var receivedIp = GetIp(proxy.Proxy);
+                var receivedIp = GetIp(proxy);
                 //Console.WriteLine($"my {myIp} : received {receivedIp}");
                 if (receivedIp == "") return false;
                 return receivedIp != myIp;
@@ -22,20 +22,32 @@ namespace Enigma_Proxies
             }
         }
 
-        public static string GetIp(string proxy = null, int timeOut = 5000)
+        public static string GetIp(ProxyBase proxyBase = null, int timeOut = 5000)
+        {
+            return Regex.Match(GetIpInfo(proxyBase, timeOut), @"query"":""(.*?)""}").Groups[1].Value;
+        }
+
+        public static string GetCountry(ProxyBase proxyBase = null, int timeOut = 5000)
+        {
+            var c = Regex.Match(GetIpInfo(proxyBase, timeOut), @"country"":""(.*?)""").Groups[1].Value;
+            return c == "" ? "Unknown" : c;
+        }
+
+
+        private static string GetIpInfo(ProxyBase proxyBase = null, int timeOut = 5000)
         {
             try
             {
                 var webRequest = (HttpWebRequest) WebRequest.Create("http://ip-api.com/json/");
             
-                if(proxy != null) webRequest.Proxy = new WebProxy(proxy, true);
+                if(proxyBase != null) webRequest.Proxy = new WebProxy(proxyBase.Proxy, true);
                 webRequest.Timeout = timeOut;
                 webRequest.ReadWriteTimeout = timeOut;
 
                 var response = (HttpWebResponse) webRequest.GetResponse();
                 var streamReader = new StreamReader(response.GetResponseStream());
 
-                return Regex.Match(streamReader.ReadToEnd(), @"query"":""(.*?)""}").Groups[1].Value;
+                return streamReader.ReadToEnd();
             }
             catch
             {

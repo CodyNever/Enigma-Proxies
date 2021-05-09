@@ -16,11 +16,12 @@
             Type = t;
             Anonymity = a;
         }
-
-
+        
         public ProxyType Type;
         public ProxyAnonymity Anonymity;
-        public string Proxy;
-        public string Country;
+        public readonly string Proxy;
+        
+        public  string Country => ProxyChecker.GetCountry(this);
+        public bool Working => ProxyChecker.CheckProxy(this);
     }
 }
